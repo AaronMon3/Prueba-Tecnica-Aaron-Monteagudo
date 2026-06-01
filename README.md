@@ -18,8 +18,8 @@ Usuario
   ▼
 [ API Python (FastAPI) ]  POST /query
   ├─ 1. Embedding de la pregunta
-  ├─ 2. Búsqueda semántica en Qdrant (top-k chunks)
-  ├─ 3. Armado de contexto + prompt ("no inventar")
+  ├─ 2. Búsqueda semántica en Qdrant 
+  ├─ 3. Armado de contexto + prompt 
   └─ 4. LLM → respuesta con citas de fuente
   ▼
 Respuesta JSON { encontrado, respuesta, fuentes }
