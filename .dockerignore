@@ -1,0 +1,10 @@
+.env
+qdrant_data/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.git/
+n8n/
+chat.py
+README.md

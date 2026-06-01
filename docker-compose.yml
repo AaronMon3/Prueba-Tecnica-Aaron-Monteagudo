@@ -1,0 +1,37 @@
+# Levanta todo el asistente con un comando:  docker compose up -d
+# Luego (una vez) genera el índice:          docker compose run --rm -e QDRANT_URL=http://qdrant:6333 api python -m src.ingest
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    restart: unless-stopped
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  api:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      QDRANT_URL: http://qdrant:6333   # la API usa Qdrant como servicio (no embebido)
+    depends_on:
+      - qdrant
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # por si los embeddings usan Ollama del host
+
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    environment:
+      N8N_SECURE_COOKIE: "false"
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - api
+
+volumes:
+  qdrant_data:
+  n8n_data:

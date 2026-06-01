@@ -1,0 +1,16 @@
+# --- API REST ---
+fastapi
+uvicorn[standard]
+
+# --- Vector store (modo local/embebido, sin Docker) ---
+qdrant-client
+
+# --- LLM + embeddings (provider-agnostic: el cliente OpenAI sirve para
+#     OpenAI y para Ollama vía su endpoint compatible /v1) ---
+openai
+
+# --- Utilidades ---
+python-dotenv      # cargar .env
+pymupdf            # leer el PDF del corpus
+tiktoken           # conteo de tokens para chunking
+requests           # llamadas auxiliares (p. ej. health de Ollama)
